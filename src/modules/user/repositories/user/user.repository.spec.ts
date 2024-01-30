@@ -14,7 +14,7 @@ vi.mock('@shared/database/prisma', () => ({
   }))
 }))
 
-describe.only('UserRepository', () => {
+describe('UserRepository', () => {
   let userRepository: IUserRepository
 
   beforeEach(() => {

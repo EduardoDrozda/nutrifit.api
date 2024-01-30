@@ -3,7 +3,7 @@ import { type IUserService } from '../../services/user'
 import { HttpStatusCode } from '@shared/enum'
 
 export class UserController {
-  constructor (private readonly userService: IUserService) {}
+  constructor(private readonly userService: IUserService) {}
 
   store = async (req: Request, res: Response, next: NextFunction) => {
     try {
