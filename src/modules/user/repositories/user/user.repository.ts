@@ -2,32 +2,25 @@ import { PrismaRepository } from '@shared/database'
 import { type IUserRepository } from './iUser.repository'
 import { type Prisma, type User } from '@prisma/client'
 
-export class UserRepository
-  extends PrismaRepository
-  implements IUserRepository {
-  constructor () {
-    super()
-    this.connect()
+export class UserRepository implements IUserRepository {
+  private prisma: PrismaRepository
+
+  constructor() {
+    this.prisma = new PrismaRepository()
   }
 
-  async store (data: Prisma.UserCreateInput): Promise<User> {
-    const user = await this.user.create({ data })
-    this.disconnect()
-    return user
+  async store(data: Prisma.UserCreateInput): Promise<User> {
+    return await this.prisma.user.create({ data })
   }
 
-  async getUserByEmail (email: string): Promise<User | null> {
-    const user = await this.user.findFirst({
+  async getUserByEmail(email: string): Promise<User | null> {
+    return await this.prisma.user.findFirst({
       where: {
         email: {
           equals: email,
-          mode: 'insensitive'
-        }
-      }
+          mode: 'insensitive',
+        },
+      },
     })
-
-    this.disconnect()
-
-    return user!
   }
 }
