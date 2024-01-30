@@ -1,19 +1,16 @@
 import express from 'express'
-import { env } from './env'
-import { ILogger, WinstonLogger } from './shared/lib'
 import { routes } from './routes'
+import { env } from './env'
+import { exceptionHandler } from '@shared/handlers'
+import { ILogger, WinstonLogger } from '@shared/lib'
 
 export class Application {
-  private readonly server: express.Application
+  server: express.Application
   private readonly logger: ILogger
-
-  get app(): express.Application {
-    return this.server
-  }
 
   constructor() {
     this.server = express()
-    this.logger = WinstonLogger.getInstance()
+    this.logger = new WinstonLogger()
 
     this.setMiddlewares()
     this.setRoutes()
@@ -21,11 +18,12 @@ export class Application {
 
   private setMiddlewares(): void {
     this.server.use(express.json())
-    this.server.use(express.urlencoded({ extended: true }))
+    this.server.use(express.urlencoded({ extended: false }))
   }
 
   private setRoutes(): void {
     this.server.use('/api', routes)
+    this.server.use(exceptionHandler)
   }
 
   async startup(): Promise<void> {

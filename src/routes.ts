@@ -1,9 +1,8 @@
-import { Router } from 'express'
+import { Router } from 'express';
+import { userRoutes } from './modules/user';
 
-const routes = Router()
+const routes = Router();
 
-routes.get('/', (req, res) => {
-  return res.json({ message: 'Hello World!' })
-})
+routes.use('/users', userRoutes);
 
-export { routes }
+export { routes };
