@@ -1,1 +1,1 @@
-export * from './request-valida.middleware';
+export * from './request-valida.middleware'

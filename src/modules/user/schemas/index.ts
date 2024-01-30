@@ -1,1 +1,1 @@
-export * from './create-user-validate.schema';
+export * from './create-user-validate.schema'

@@ -1,6 +1,6 @@
-import { ICreateUserDTO, IGetUserDTO } from "../../dtos";
+import { type ICreateUserDTO, type IGetUserDTO } from '../../dtos'
 
 export interface IUserService {
-  store(data: ICreateUserDTO): Promise<IGetUserDTO>;
-  getUserByEmail(email: string): Promise<IGetUserDTO | null>;
+  store: (data: ICreateUserDTO) => Promise<IGetUserDTO>
+  getUserByEmail: (email: string) => Promise<IGetUserDTO | null>
 }

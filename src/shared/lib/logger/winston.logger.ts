@@ -1,12 +1,12 @@
-import { ILogger } from './iLogger'
+import { type ILogger } from './iLogger'
 import * as winston from 'winston'
 
 export class WinstonLogger implements ILogger {
-  private logger: winston.Logger
+  private readonly logger: winston.Logger
 
   private static instance: WinstonLogger
 
-  public static getInstance(): WinstonLogger {
+  public static getInstance (): WinstonLogger {
     if (!WinstonLogger.instance) {
       WinstonLogger.instance = new WinstonLogger()
     }
@@ -14,25 +14,28 @@ export class WinstonLogger implements ILogger {
     return WinstonLogger.instance
   }
 
-  constructor() {
+  constructor () {
     this.logger = winston.createLogger({
       transports: [
         new winston.transports.Console(),
-        new winston.transports.File({ filename: './logs/combined.log' }),
-      ],
+        new winston.transports.File({ filename: './logs/combined.log' })
+      ]
     })
   }
 
-  info(message: string): void {
+  info (message: string): void {
     this.logger.info(message)
   }
-  error(message: string): void {
+
+  error (message: string): void {
     this.logger.error(message)
   }
-  warn(message: string): void {
+
+  warn (message: string): void {
     this.logger.warn(message)
   }
-  debug(message: string): void {
+
+  debug (message: string): void {
     this.logger.debug(message)
   }
 }

@@ -1,2 +1,2 @@
-export * from './iLogger';
-export * from './winston.logger';
+export * from './iLogger'
+export * from './winston.logger'

@@ -1,16 +1,16 @@
-import { HttpStatusCode } from '@shared/enum';
+import { HttpStatusCode } from '@shared/enum'
 
 export class BadRequestException extends Error {
-  public statusCode: HttpStatusCode;
-  public errors: string[];
-  constructor(
+  public statusCode: HttpStatusCode
+  public errors: string[]
+  constructor (
     message: string,
     statusCode = HttpStatusCode.BAD_REQUEST,
     errors: string[] = []
   ) {
-    super(message);
-    this.name = 'UnprocessableEntityException';
-    this.statusCode = statusCode;
-    this.errors = errors;
+    super(message)
+    this.name = 'UnprocessableEntityException'
+    this.statusCode = statusCode
+    this.errors = errors
   }
 }

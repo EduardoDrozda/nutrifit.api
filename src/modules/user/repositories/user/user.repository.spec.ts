@@ -1,17 +1,17 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { IUserRepository } from './iUser.repository'
+import { type IUserRepository } from './iUser.repository'
 import { UserRepository } from './user.repository'
 
 vi.mock('@shared/database/prisma', () => ({
-  PrismaClient: vi.fn().mockImplementation(() => ({
-    $connect: vi.fn(),
-    $disconnect: vi.fn(),
-    users: {
+  PrismaRepository: vi.fn().mockImplementation(() => ({
+    connect: vi.fn(),
+    disconnect: vi.fn(),
+    user: {
       create: vi.fn(),
-      findFirst: vi.fn(),
-    },
-  })),
+      findFirst: vi.fn()
+    }
+  }))
 }))
 
 describe.only('UserRepository', () => {
