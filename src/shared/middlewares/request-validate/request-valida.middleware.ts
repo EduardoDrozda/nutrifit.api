@@ -4,7 +4,7 @@ import { HttpStatusCode } from '@shared/enum'
 import { type NextFunction, type Request, type Response } from 'express'
 import { type z } from 'zod'
 
-export function validateRequestMiddleware<T> (validateSchema: z.ZodSchema<T>) {
+export function validateRequestMiddleware<T>(validateSchema: z.ZodSchema<T>) {
   return (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = req.body
@@ -18,8 +18,8 @@ export function validateRequestMiddleware<T> (validateSchema: z.ZodSchema<T>) {
         new UnprocessableEntityException(
           'Validation error',
           HttpStatusCode.UNPROCESSABLE_ENTITY,
-          errors
-        )
+          errors,
+        ),
       )
     }
   }

@@ -8,7 +8,7 @@ export class Application {
   server: express.Application
   private readonly logger: ILogger
 
-  constructor () {
+  constructor() {
     this.server = express()
     this.logger = new WinstonLogger()
 
@@ -16,17 +16,17 @@ export class Application {
     this.setRoutes()
   }
 
-  private setMiddlewares (): void {
+  private setMiddlewares(): void {
     this.server.use(express.json())
     this.server.use(express.urlencoded({ extended: false }))
   }
 
-  private setRoutes (): void {
+  private setRoutes(): void {
     this.server.use('/api', routes)
     this.server.use(exceptionHandler)
   }
 
-  async startup (): Promise<void> {
+  async startup(): Promise<void> {
     const port = env.APP_PORT
 
     this.server.listen(port, () => {

@@ -1,15 +1,15 @@
 import { PrismaClient } from '@prisma/client'
 
 export class PrismaRepository extends PrismaClient {
-  constructor () {
+  constructor() {
     super()
   }
 
-  async connect () {
+  async connect() {
     await this.$connect()
   }
 
-  async disconnect () {
+  async disconnect() {
     await this.$disconnect()
   }
 }

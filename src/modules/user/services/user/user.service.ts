@@ -4,9 +4,9 @@ import { type IUserService } from './iUser.service'
 import { BadRequestException } from '@shared/classes/exceptions'
 
 export class UserService implements IUserService {
-  constructor (private readonly userRepository: IUserRepository) {}
+  constructor(private readonly userRepository: IUserRepository) {}
 
-  async store (data: ICreateUserDTO): Promise<IGetUserDTO> {
+  async store(data: ICreateUserDTO): Promise<IGetUserDTO> {
     const { name, email, password } = data
     const findedUser = await this.getUserByEmail(email)
 
@@ -17,17 +17,17 @@ export class UserService implements IUserService {
     const user = await this.userRepository.store({
       name,
       email,
-      password
+      password,
     })
 
     return {
       id: user.id,
       name: user.name,
-      email: user.email
+      email: user.email,
     }
   }
 
-  async getUserByEmail (email: string): Promise<IGetUserDTO | null> {
+  async getUserByEmail(email: string): Promise<IGetUserDTO | null> {
     const user = await this.userRepository.getUserByEmail(email)
 
     if (!user) {
@@ -37,7 +37,7 @@ export class UserService implements IUserService {
     return {
       id: user.id,
       name: user.name,
-      email: user.email
+      email: user.email,
     }
   }
 }

@@ -14,7 +14,7 @@ const userRoutes = Router()
 userRoutes.post(
   '/',
   validateRequestMiddleware(createUserValidateSchema),
-  userController.store
+  userController.store,
 )
 
 export { userRoutes }

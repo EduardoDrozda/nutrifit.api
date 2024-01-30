@@ -4,10 +4,10 @@ export class UnprocessableEntityException extends Error {
   public statusCode: HttpStatusCode
   public errors: string[]
 
-  constructor (
+  constructor(
     message: string,
     statusCode = HttpStatusCode.UNPROCESSABLE_ENTITY,
-    errors: string[] = []
+    errors: string[] = [],
   ) {
     super(message)
     this.name = 'UnprocessableEntityException'

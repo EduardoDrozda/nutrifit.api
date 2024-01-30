@@ -2,7 +2,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { IUserRepository } from './iUser.repository'
 import { UserRepository } from './user.repository'
-import { PrismaRepository } from '@shared/database'
 
 const prismaRepository = {
   connect: vi.fn(),
