@@ -1,8 +1,10 @@
 import express from 'express'
 import { env } from './env'
+import { ILogger, WinstonLogger } from './shared/lib'
 
 export class Application {
   private readonly server: express.Application
+  private readonly logger: ILogger
 
   get app(): express.Application {
     return this.server
@@ -10,6 +12,7 @@ export class Application {
 
   constructor() {
     this.server = express()
+    this.logger = WinstonLogger.getInstance()
 
     this.setMiddlewares()
   }
@@ -23,7 +26,7 @@ export class Application {
     const port = env.APP_PORT
 
     this.server.listen(port, () => {
-      console.log(`Server listening on port ${port}`)
+      this.logger.info(`Server is running on port ${port}`)
     })
   }
 }
