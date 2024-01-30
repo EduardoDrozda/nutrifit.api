@@ -1,6 +1,7 @@
 import express from 'express'
 import { env } from './env'
 import { ILogger, WinstonLogger } from './shared/lib'
+import { routes } from './routes'
 
 export class Application {
   private readonly server: express.Application
@@ -15,11 +16,16 @@ export class Application {
     this.logger = WinstonLogger.getInstance()
 
     this.setMiddlewares()
+    this.setRoutes()
   }
 
   private setMiddlewares(): void {
     this.server.use(express.json())
     this.server.use(express.urlencoded({ extended: true }))
+  }
+
+  private setRoutes(): void {
+    this.server.use('/api', routes)
   }
 
   async startup(): Promise<void> {
