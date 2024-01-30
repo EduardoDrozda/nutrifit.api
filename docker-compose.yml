@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+  nutrifit__db:
+    container_name: nutrifit__db
+    image: bitnami/postgresql
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: admin
+      POSTGRES_DB: nutrifit__db
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - nutrifit
+  
+  nutrifit__cache:
+    container_name: nutrifit__cache
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - nutrifit
+    volumes:
+      - cache:/data
+    
+volumes:
+  pgdata:
+  cache:
+
+networks:
+  nutrifit:
+    driver: bridge
