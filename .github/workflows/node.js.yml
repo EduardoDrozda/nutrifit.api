@@ -27,26 +27,26 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
 
-  # lint:
-  #   needs: build
-  #   runs-on: ubuntu-latest
+  lint:
+    needs: build
+    runs-on: ubuntu-latest
 
-  #   strategy:
-  #     matrix:
-  #       node-version: [16.x, 18.x, 20.x]
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
 
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-  #     - name: Use build artifacts
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: node_modules
-  #         key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Use build artifacts
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
 
-  #     - run: npm ci
-  #     - run: npm run lint
+      - run: npm ci
+      - run: npm run lint
 
   test:
     needs: build

@@ -17,7 +17,7 @@ vi.mock('@shared/database/prisma', () => ({
   PrismaRepository: vi.fn().mockImplementation(() => prismaRepository),
 }))
 
-describe.only('UserRepository', () => {
+describe('UserRepository', () => {
   let sut: IUserRepository
 
   beforeEach(() => {
