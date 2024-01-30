@@ -2,6 +2,7 @@ import { type IUserRepository } from '@modules/user/repositories/user'
 import { type ICreateUserDTO, type IGetUserDTO } from '../../dtos'
 import { type IUserService } from './iUser.service'
 import { BadRequestException } from '@shared/classes/exceptions'
+import { hash } from 'bcryptjs'
 
 export class UserService implements IUserService {
   constructor(private readonly userRepository: IUserRepository) {}
@@ -17,7 +18,7 @@ export class UserService implements IUserService {
     const user = await this.userRepository.store({
       name,
       email,
-      password,
+      password: await hash(password, 8),
     })
 
     return {
