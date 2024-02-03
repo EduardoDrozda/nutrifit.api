@@ -7,6 +7,8 @@ export abstract class Hash {
       salt = env.HASH_SALT
     }
 
+    console.log(salt)
+
     return bcryptjs.hash(value, salt)
   }
 
