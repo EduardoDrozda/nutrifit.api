@@ -1,0 +1,4 @@
+{
+  "name": "vitest-enviroment-prisma",
+  "main": "prisma-test-enviroment.ts"
+}
