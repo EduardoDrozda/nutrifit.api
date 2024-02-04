@@ -68,3 +68,67 @@ jobs:
 
       - run: npm ci
       - run: npm run test
+  
+  test-e2e:
+    needs: build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        uses: adambirds/docker-compose-action@v1.3.0
+        with:
+          compose_version: 1.29.2
+        
+      - name: Start docker-compose
+        run: docker-compose up -d
+        
+      - name: Wait for services
+        run: docker-compose exec -T service-name sh -c 'while ! nc -z localhost 3000; do sleep 1; done;'
+      
+      - name: Run tests
+        run: npm run test-e2e
+      
+      - name: Stop docker-compose
+        run: docker-compose down
+      
+      - name: Remove docker-compose
+        run: docker-compose rm -f
+      
+      - name: Remove docker-compose images
+        run: docker rmi $(docker images -q)
+      
+      - name: Remove docker-compose volumes
+        run: docker volume rm $(docker volume ls -q)
+      
+      - name: Remove docker-compose networks
+        run: docker network rm $(docker network ls -q)
+      
+      - name: Remove docker-compose containers
+        run: docker rm $(docker ps -a -q)
+    
+  deploy:
+    needs:
+      - build
+      - test
+      - lint
+      - test-e2e
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: xxxxxxxxxxxxxxxx@xx
+
+      - name: Use build artifacts
+        uses: xxxxxxxxxxxxx@xx
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      - run: npm ci
+      - run: npm run build

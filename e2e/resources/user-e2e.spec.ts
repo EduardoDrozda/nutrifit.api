@@ -13,7 +13,6 @@ describe('User E2E', () => {
       passwordConfirmation: 'secret',
     })
 
-    console.log(response.body)
     expect(response.statusCode).toBe(201)
   })
 })
