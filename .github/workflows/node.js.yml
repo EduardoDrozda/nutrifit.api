@@ -83,7 +83,7 @@ jobs:
       - name: Build docker-compose
         uses: adambirds/docker-compose-action@v1.3.0
         with:
-          compose_version: 1.29.2
+          compose-files: ./docker-compose.yml
         
       - name: Start docker-compose
         run: docker-compose up -d
