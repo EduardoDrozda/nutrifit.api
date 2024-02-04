@@ -91,6 +91,11 @@ jobs:
       
       - run: npm ci
       - run: npm run test:e2e
+        env:
+          APP_PORT: 3333
+          NODE_ENV: test
+          HASH_SALT: 10
+          DATABASE_URL: postgresql://admin:secret@localhost:5432/nutrifit__db?schema=public
 
   deploy:
     runs-on: ubuntu-latest
