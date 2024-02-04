@@ -68,7 +68,7 @@ jobs:
 
       - run: npm ci
       - run: npm run test
-  
+
   test-e2e:
     needs: build
     runs-on: ubuntu-latest
@@ -79,39 +79,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Build docker-compose
-        uses: adambirds/docker-compose-action@v1.3.0
+      - uses: adambirds/docker-compose-action@v1.3.0
         with:
-          compose-file: ../../docker-compose.yml
-        
-      - name: Start docker-compose
-        run: docker-compose up -d
-        
-      - name: Wait for services
-        run: docker-compose exec -T service-name sh -c 'while ! nc -z localhost 3000; do sleep 1; done;'
-      
-      - name: Run tests
-        run: npm run test-e2e
-      
-      - name: Stop docker-compose
-        run: docker-compose down
-      
-      - name: Remove docker-compose
-        run: docker-compose rm -f
-      
-      - name: Remove docker-compose images
-        run: docker rmi $(docker images -q)
-      
-      - name: Remove docker-compose volumes
-        run: docker volume rm $(docker volume ls -q)
-      
-      - name: Remove docker-compose networks
-        run: docker network rm $(docker network ls -q)
-      
-      - name: Remove docker-compose containers
-        run: docker rm $(docker ps -a -q)
-    
+          compose-file: './docker-compose.yml'
+          down-flags: '--volumes'
+          test-container: helloworld
+          test-command: 'npm test'
+
   deploy:
     needs:
       - build
