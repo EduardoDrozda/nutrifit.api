@@ -72,8 +72,6 @@ jobs:
   test-e2e:
     needs:
       - build
-      - lint
-      - test
     runs-on: ubuntu-latest
 
     steps:
@@ -99,9 +97,6 @@ jobs:
 
       - name: Stop containers
         run: docker-compose -f "docker-compose.yml" down
-      
-      - name: Remove containers
-        run: docker-compose -f "docker-compose.yml" rm -f
 
   deploy:
     runs-on: ubuntu-latest
