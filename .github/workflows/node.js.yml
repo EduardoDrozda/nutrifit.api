@@ -92,10 +92,10 @@ jobs:
       - run: npm ci
       - run: npm run test:e2e
         env:
-          APP_PORT: 3333
-          NODE_ENV: test
-          HASH_SALT: 10
-          DATABASE_URL: postgresql://admin:secret@localhost:5432/nutrifit__db?schema=public
+          APP_PORT: ${{ secrets.APP_PORT }}
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          HASH_SALT: ${{ secrets.HASH_SALT }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -103,6 +103,7 @@ jobs:
       - build
       - test
       - lint
+      - test-e2e
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
