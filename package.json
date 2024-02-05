@@ -15,7 +15,7 @@
     "test:e2e": "vitest run --dir e2e",
     "test:watch": "vitest --dir src",
     "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui --coverage"
   },
   "keywords": [],
   "author": "",

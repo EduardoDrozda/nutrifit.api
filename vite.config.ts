@@ -5,5 +5,9 @@ export default defineConfig({
   plugins: [tsConfigPaths()],
   test: {
     environmentMatchGlobs: [['e2e/**/*.spec.ts', 'vitest-enviroment-prisma']],
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+      exclude: ['node_modules'],
+    },
   },
 })

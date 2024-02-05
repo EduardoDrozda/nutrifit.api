@@ -1,13 +1,10 @@
 import { Router } from 'express'
-import { UserController } from './controllers/user'
-import { type IUserService, UserService } from './services/user'
+
 import { validateRequestMiddleware } from '@shared/middlewares'
 import { createUserValidateSchema } from './schemas'
-import { type IUserRepository, UserRepository } from './repositories/user'
+import { createUserFactory } from './factories'
 
-const userRepository: IUserRepository = new UserRepository()
-const userService: IUserService = new UserService(userRepository)
-const userController = new UserController(userService)
+const userController = createUserFactory.build()
 
 const userRoutes = Router()
 
