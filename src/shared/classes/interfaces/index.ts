@@ -1,1 +1,1 @@
-export * from './IFactory';
+export * from './IFactory'
