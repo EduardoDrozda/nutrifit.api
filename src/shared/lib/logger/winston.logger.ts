@@ -1,9 +1,9 @@
 /* eslint-disable no-use-before-define */
 import { type ILogger } from './iLogger'
-import * as winston from 'winston'
+import * as Winston from 'winston'
 
 export class WinstonLogger implements ILogger {
-  private readonly logger: winston.Logger
+  private readonly logger: Winston.Logger
 
   private static instance: WinstonLogger
 
@@ -15,11 +15,11 @@ export class WinstonLogger implements ILogger {
     return WinstonLogger.instance
   }
 
-  constructor() {
-    this.logger = winston.createLogger({
+  private constructor() {
+    this.logger = Winston.createLogger({
       transports: [
-        new winston.transports.Console(),
-        new winston.transports.File({ filename: './logs/combined.log' }),
+        new Winston.transports.Console(),
+        new Winston.transports.File({ filename: './logs/combined.log' }),
       ],
     })
   }

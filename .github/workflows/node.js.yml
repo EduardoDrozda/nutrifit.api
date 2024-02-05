@@ -70,9 +70,12 @@ jobs:
       - run: npm run test
 
   test-e2e:
-    needs:
-      - build
+    needs: build
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
 
     steps:
       - name: Checkout repository
