@@ -9,7 +9,7 @@ export class BadRequestException extends Error {
     errors: string[] = [],
   ) {
     super(message)
-    this.name = 'UnprocessableEntityException'
+    this.name = 'BadRequestException'
     this.statusCode = statusCode
     this.errors = errors
   }
