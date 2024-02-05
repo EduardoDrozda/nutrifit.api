@@ -6,7 +6,7 @@ import { describe, expect, it, vi } from 'vitest'
 import { exceptionHandler } from './exception.handler'
 import { HttpStatusCode } from '@shared/enum'
 
-describe.only('Exception Handler', () => {
+describe('Exception Handler', () => {
   const mockResponse = {
     status: vi.fn().mockReturnThis(),
     json: vi.fn(),
