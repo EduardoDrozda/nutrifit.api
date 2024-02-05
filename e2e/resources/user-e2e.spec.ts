@@ -54,7 +54,7 @@ describe('User E2E', () => {
     }
 
     const response = await request(app.server).post('/api/users').send(mockUser)
-    console.log(response)
+   
     expect(response.statusCode).toBe(HttpStatusCode.UNPROCESSABLE_ENTITY)
     expect(response.body.errors).toEqual([
       'Password and password confirmation must be equal',

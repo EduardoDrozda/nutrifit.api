@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { UserController } from './user.controller'
 import { IUserService } from '@modules/user/services/user'
 import { HttpStatusCode } from '@shared/enum'
+import { ICreateUserDTO } from '@modules/user/dtos'
 
 describe('UserController', () => {
   let controller: UserController
@@ -32,10 +33,11 @@ describe('UserController', () => {
 
     vi.spyOn(service, 'store').mockResolvedValueOnce(user)
 
-    const payload = {
+    const payload: ICreateUserDTO = {
       name: user.name,
       email: user.email,
       password: user.password,
+      passwordConfirmation: user.password,
     }
 
     const request: any = {
