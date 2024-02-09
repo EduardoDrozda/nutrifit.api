@@ -60,4 +60,36 @@ describe('User E2E', () => {
       'Password and password confirmation must be equal',
     ])
   })
+
+  it('should be able to get logged user', async () => {
+    const mockUser = {
+      name: 'User Example',
+      email: 'mock@email.com',
+      password: '$2a$10$WpfmWPpMldrC7VQdkV7TGes5PWPs1hXd1bCZJk2W5gdEg3m6udR1y',
+    }
+
+    const createdUser = await prisma.user.create({
+      data: mockUser,
+    })
+
+    const response = await request(app.server).post('/api/auth').send({
+      email: mockUser.email,
+      password: 'secret',
+    })
+
+    const {
+      token: { type, access_token },
+    } = response.body
+
+    await request(app.server)
+      .get('/api/users/me')
+      .set('Authorization', `${type} ${access_token}`)
+      .send()
+      .expect(HttpStatusCode.OK)
+      .then((response) => {
+        const data = response.body
+        expect(data).toHaveProperty('id')
+        expect(data.id).toBe(createdUser.id)
+      })
+  })
 })

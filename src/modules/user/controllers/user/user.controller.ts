@@ -13,4 +13,13 @@ export class UserController {
       next(err)
     }
   }
+
+  getLoggedUser = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.userId
+      return res.status(HttpStatusCode.OK).json({ id: userId })
+    } catch (err) {
+      next(err)
+    }
+  }
 }

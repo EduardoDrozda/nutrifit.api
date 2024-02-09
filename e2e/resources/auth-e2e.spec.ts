@@ -2,7 +2,7 @@ import { UserRepository } from '@modules/user/repositories/user'
 import { UserService } from '@modules/user/services/user'
 import { PrismaRepository } from '@shared/database'
 import { Application } from 'src/app'
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterAll, afterEach, describe, expect, it } from 'vitest'
 import request from 'supertest'
 import { HttpStatusCode } from '@shared/enum'
 
@@ -14,6 +14,11 @@ describe('Auth E2E', () => {
 
   afterEach(async () => {
     await prisma.user.deleteMany()
+  })
+
+  afterAll(async () => {
+    await prisma.user.deleteMany()
+    await prisma.$disconnect()
   })
 
   it('should be able to authenticate with valid credentials', async () => {
