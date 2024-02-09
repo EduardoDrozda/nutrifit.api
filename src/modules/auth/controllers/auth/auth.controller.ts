@@ -16,7 +16,6 @@ export class AuthController {
 
       return res.status(HttpStatusCode.OK).json({ user, token })
     } catch (err) {
-      console.log(err)
       next(err)
     }
   }

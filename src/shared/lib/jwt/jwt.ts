@@ -7,7 +7,7 @@ export abstract class Jwt {
       secret = env.JWT_SECRET
     }
 
-    return jwt.sign(payload, secret)
+    return jwt.sign(payload, secret, { expiresIn: env.JWT_EXPIRES_IN })
   }
 
   static verify(token: string, secret?: string): string | object {

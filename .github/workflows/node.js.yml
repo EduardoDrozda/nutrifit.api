@@ -97,6 +97,8 @@ jobs:
           NODE_ENV: ${{ secrets.NODE_ENV }}
           HASH_SALT: ${{ secrets.HASH_SALT }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
 
       - name: Stop containers
         run: docker-compose -f "docker-compose.yml" down
