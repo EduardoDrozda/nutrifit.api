@@ -8,6 +8,7 @@ on:
     branches: ['main']
   pull_request:
     branches: ['main']
+    
 
 jobs:
   build:
@@ -68,6 +69,13 @@ jobs:
 
       - run: npm ci
       - run: npm run test
+        env:
+          APP_PORT: ${{ secrets.APP_PORT }}
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          HASH_SALT: ${{ secrets.HASH_SALT }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
 
   test-e2e:
     needs: build
