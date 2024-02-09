@@ -1,13 +1,13 @@
-import { type IUserRepository } from '@modules/user/repositories/user'
-import { type ICreateUserDTO, type IGetUserDTO } from '../../dtos'
-import { type IUserService } from './iUser.service'
 import { BadRequestException } from '@shared/classes/exceptions'
 import { Hash } from '@shared/lib'
+import { IUserService } from './iUser.service'
+import { IUserRepository } from '@modules/user/repositories/user'
+import { ICreateUserRequestDTO, IGetUserResponseDTO } from '@modules/user/dtos'
 
 export class UserService implements IUserService {
   constructor(private readonly userRepository: IUserRepository) {}
 
-  async store(data: ICreateUserDTO): Promise<IGetUserDTO> {
+  async store(data: ICreateUserRequestDTO): Promise<IGetUserResponseDTO> {
     const { name, email, password } = data
     const findedUser = await this.getUserByEmail(email)
 
@@ -28,7 +28,7 @@ export class UserService implements IUserService {
     }
   }
 
-  async getUserByEmail(email: string): Promise<IGetUserDTO | null> {
+  async getUserByEmail(email: string): Promise<IGetUserResponseDTO | null> {
     const user = await this.userRepository.getUserByEmail(email)
 
     if (!user) {
@@ -39,6 +39,7 @@ export class UserService implements IUserService {
       id: user.id,
       name: user.name,
       email: user.email,
+      password: user.password,
     }
   }
 }

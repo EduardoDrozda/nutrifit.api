@@ -2,9 +2,9 @@ import { Router } from 'express'
 
 import { validateRequestMiddleware } from '@shared/middlewares'
 import { createUserValidateSchema } from './schemas'
-import { createUserFactory } from './factories'
+import { createUserControllerFactory } from './factories'
 
-const userController = createUserFactory.build()
+const userController = createUserControllerFactory.build()
 
 const userRoutes = Router()
 

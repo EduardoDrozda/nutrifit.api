@@ -3,7 +3,7 @@ import { UserController } from '../controllers/user'
 import { IUserService, UserService } from '../services/user'
 import { IUserRepository, UserRepository } from '../repositories/user'
 
-class CreateUserFactory implements IFactory<UserController> {
+class CreateUserControllerFactory implements IFactory<UserController> {
   build(): UserController {
     const userService = this.createUserService()
     return new UserController(userService)
@@ -15,6 +15,6 @@ class CreateUserFactory implements IFactory<UserController> {
   }
 }
 
-const createUserFactory = new CreateUserFactory()
+const createUserControllerFactory = new CreateUserControllerFactory()
 
-export { createUserFactory }
+export { createUserControllerFactory }

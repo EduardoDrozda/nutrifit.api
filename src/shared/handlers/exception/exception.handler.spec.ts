@@ -54,6 +54,7 @@ describe('Exception Handler', () => {
     expect(mockResponse.json).toHaveBeenCalledWith({
       statusCode: HttpStatusCode.INTERNAL_SERVER_ERROR,
       message: 'Internal server error',
+      stack: error.stack,
     })
   })
 })

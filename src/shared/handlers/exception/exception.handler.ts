@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
+  UnathorizedException,
   type BadRequestException,
   type UnprocessableEntityException,
 } from '@shared/classes/exceptions'
@@ -30,8 +31,17 @@ export function exceptionHandler(
     })
   }
 
+  if (error.name === 'UnauthorizedException') {
+    const err = error as UnathorizedException
+    return res.status(401).json({
+      message: err.message,
+      statusCode: err.statusCode,
+    })
+  }
+
   return res.status(500).json({
     statusCode: 500,
     message: 'Internal server error',
+    stack: error.stack,
   })
 }

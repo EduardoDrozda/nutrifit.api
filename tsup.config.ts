@@ -8,5 +8,5 @@ export default defineConfig({
   minify: true,
   clean: true,
   sourcemap: true,
-  legacyOutput: true
+  legacyOutput: true,
 })
