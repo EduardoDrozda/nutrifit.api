@@ -1,7 +1,7 @@
 export interface IAuthResponseDTO {
   token: {
     type: string
-    access_token: string
+    accessToken: string
   }
   user: {
     id: string

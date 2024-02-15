@@ -18,7 +18,7 @@ export class AuthService implements IAuthService {
     return {
       token: {
         type: 'Bearer',
-        access_token: Jwt.sign({ id: user.id }),
+        accessToken: Jwt.sign({ id: user.id }),
       },
       user: {
         id: user.id,

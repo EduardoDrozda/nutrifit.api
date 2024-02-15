@@ -78,12 +78,12 @@ describe('User E2E', () => {
     })
 
     const {
-      token: { type, access_token },
+      token: { type, accessToken },
     } = response.body
 
     await request(app.server)
       .get('/api/users/me')
-      .set('Authorization', `${type} ${access_token}`)
+      .set('Authorization', `${type} ${accessToken}`)
       .send()
       .expect(HttpStatusCode.OK)
       .then((response) => {
