@@ -38,6 +38,7 @@ describe('Auth E2E', () => {
       })
       .expect(HttpStatusCode.OK)
       .then((response) => {
+        console.log(response);
         const data = response.body
         expect(data).toHaveProperty('user')
         expect(data.user.id).toBe(user.id)
@@ -45,7 +46,7 @@ describe('Auth E2E', () => {
         expect(data.user.email).toBe(user.email)
         expect(data).toHaveProperty('token')
         expect(data.token).toHaveProperty('type')
-        expect(data.token).toHaveProperty('access_token')
+        expect(data.token).toHaveProperty('accessToken:')
       })
   })
 
